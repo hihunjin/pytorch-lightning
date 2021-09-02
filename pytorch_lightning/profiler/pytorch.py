@@ -43,8 +43,8 @@ _PROFILER = Union[torch.autograd.profiler.profile, torch.cuda.profiler.profile, 
 
 
 class RegisterRecordFunction:
-    """
-    While profiling autograd operations, this class will add labels for module names around the forward function.
+    """While profiling autograd operations, this class will add labels for module names around the forward
+    function.
 
     The Lightning PyTorch Profiler will activate this feature automatically. It can be deactivated as follows:
 
@@ -98,10 +98,8 @@ class RegisterRecordFunction:
 
 
 class ScheduleWrapper:
-    """
-    This class is used to override the schedule logic from the profiler and perform
-    recording for both `training_step`, `validation_step`.
-    """
+    """This class is used to override the schedule logic from the profiler and perform recording for both
+    `training_step`, `validation_step`."""
 
     def __init__(self, schedule: Callable) -> None:
         if not _KINETO_AVAILABLE:
@@ -224,8 +222,8 @@ class PyTorchProfiler(BaseProfiler):
         record_module_names: bool = True,
         **profiler_kwargs: Any,
     ) -> None:
-        """
-        This profiler uses PyTorch's Autograd Profiler and lets you inspect the cost of
+        """This profiler uses PyTorch's Autograd Profiler and lets you inspect the cost of.
+
         different operators inside your model - both on the CPU and GPU
 
         Args:

@@ -84,9 +84,9 @@ def test_epoch_loop_progress_increment_sequence():
 
 
 def test_optimizer_progress_default_factory():
-    """
-    Ensure that the defaults are created appropiately. If `default_factory` was not used, the default would
-    be shared between instances.
+    """Ensure that the defaults are created appropiately.
+
+    If `default_factory` was not used, the default would be shared between instances.
     """
     p1 = OptimizerProgress()
     p2 = OptimizerProgress()

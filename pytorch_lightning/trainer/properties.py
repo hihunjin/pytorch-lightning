@@ -209,8 +209,8 @@ class TrainerProperties(ABC):
 
     @property
     def model(self) -> torch.nn.Module:
-        """
-        The LightningModule, but possibly wrapped into DataParallel or DistributedDataParallel.
+        """The LightningModule, but possibly wrapped into DataParallel or DistributedDataParallel.
+
         To access the pure LightningModule, use
         :meth:`~pytorch_lightning.trainer.trainer.Trainer.lightning_module` instead.
         """
@@ -218,9 +218,8 @@ class TrainerProperties(ABC):
 
     @model.setter
     def model(self, model: torch.nn.Module) -> None:
-        """
-        Setter for the model, pass-through to accelerator and plugin where the model reference is stored.
-        Used by the Tuner to reset the state of Trainer and Accelerator.
+        """Setter for the model, pass-through to accelerator and plugin where the model reference is stored. Used
+        by the Tuner to reset the state of Trainer and Accelerator.
 
         Args:
             model: The LightningModule, possibly wrapped into DataParallel or DistributedDataParallel, depending
@@ -336,8 +335,8 @@ class TrainerProperties(ABC):
 
     @property
     def default_root_dir(self) -> str:
-        """
-        The default location to save artifacts of loggers, checkpoints etc.
+        """The default location to save artifacts of loggers, checkpoints etc.
+
         It is used as a fallback if logger or checkpoint callback do not define specific save paths.
         """
         if get_filesystem(self._default_root_dir).protocol == "file":
@@ -356,44 +355,34 @@ class TrainerProperties(ABC):
 
     @property
     def early_stopping_callback(self) -> Optional[EarlyStopping]:
-        """
-        The first :class:`~pytorch_lightning.callbacks.early_stopping.EarlyStopping`
-        callback in the Trainer.callbacks list, or ``None`` if it doesn't exist.
-        """
+        """The first :class:`~pytorch_lightning.callbacks.early_stopping.EarlyStopping` callback in the
+        Trainer.callbacks list, or ``None`` if it doesn't exist."""
         callbacks = self.early_stopping_callbacks
         return callbacks[0] if len(callbacks) > 0 else None
 
     @property
     def early_stopping_callbacks(self) -> List[EarlyStopping]:
-        """
-        A list of all instances of :class:`~pytorch_lightning.callbacks.early_stopping.EarlyStopping`
-        found in the Trainer.callbacks list.
-        """
+        """A list of all instances of :class:`~pytorch_lightning.callbacks.early_stopping.EarlyStopping` found in
+        the Trainer.callbacks list."""
         return [c for c in self.callbacks if isinstance(c, EarlyStopping)]
 
     @property
     def prediction_writer_callbacks(self) -> List[BasePredictionWriter]:
-        """
-        A list of all instances of :class:`~pytorch_lightning.callbacks.prediction_writer.BasePredictionWriter`
-        found in the Trainer.callbacks list.
-        """
+        """A list of all instances of :class:`~pytorch_lightning.callbacks.prediction_writer.BasePredictionWriter`
+        found in the Trainer.callbacks list."""
         return [cb for cb in self.callbacks if isinstance(cb, BasePredictionWriter)]
 
     @property
     def checkpoint_callback(self) -> Optional[ModelCheckpoint]:
-        """
-        The first :class:`~pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint`
-        callback in the Trainer.callbacks list, or ``None`` if it doesn't exist.
-        """
+        """The first :class:`~pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint` callback in the
+        Trainer.callbacks list, or ``None`` if it doesn't exist."""
         callbacks = self.checkpoint_callbacks
         return callbacks[0] if len(callbacks) > 0 else None
 
     @property
     def checkpoint_callbacks(self) -> List[ModelCheckpoint]:
-        """
-        A list of all instances of :class:`~pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint`
-        found in the Trainer.callbacks list.
-        """
+        """A list of all instances of :class:`~pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint` found
+        in the Trainer.callbacks list."""
         return [c for c in self.callbacks if isinstance(c, ModelCheckpoint)]
 
     @property
@@ -553,8 +542,9 @@ class TrainerProperties(ABC):
 
     @fit_loop.setter
     def fit_loop(self, loop: FitLoop):
-        """
-        Attach a custom fit loop to this Trainer. It will run with
+        """Attach a custom fit loop to this Trainer.
+
+        It will run with
         :meth:`~pytorch_lighting.trainer.trainer.Trainer.fit`.
         """
         loop.trainer = self
@@ -566,8 +556,9 @@ class TrainerProperties(ABC):
 
     @validate_loop.setter
     def validate_loop(self, loop: EvaluationLoop):
-        """
-        Attach a custom validation loop to this Trainer. It will run with
+        """Attach a custom validation loop to this Trainer.
+
+        It will run with
         :meth:`~pytorch_lighting.trainer.trainer.Trainer.validate`. Note that this loop is different from the one
         running during training inside the :meth:`pytorch_lightning.trainer.trainer.Trainer.fit` call.
         """
@@ -580,8 +571,9 @@ class TrainerProperties(ABC):
 
     @test_loop.setter
     def test_loop(self, loop: EvaluationLoop):
-        """
-        Attach a custom test loop to this Trainer. It will run with
+        """Attach a custom test loop to this Trainer.
+
+        It will run with
         :meth:`~pytorch_lightning.trainer.trainer.Trainer.test`.
         """
         loop.trainer = self
@@ -593,8 +585,9 @@ class TrainerProperties(ABC):
 
     @predict_loop.setter
     def predict_loop(self, loop: PredictionLoop):
-        """
-        Attach a custom prediction loop to this Trainer. It will run with
+        """Attach a custom prediction loop to this Trainer.
+
+        It will run with
         :meth:`~pytorch_lightning.trainer.trainer.Trainer.predict`.
         """
         loop.trainer = self

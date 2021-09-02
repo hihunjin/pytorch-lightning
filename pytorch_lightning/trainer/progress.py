@@ -32,8 +32,7 @@ class BaseProgress:
 
 @dataclass
 class Tracker(BaseProgress):
-    """
-    Track an event's progress.
+    """Track an event's progress.
 
     Args:
         ready: Intended to track the number of events ready to start.
@@ -70,7 +69,7 @@ class Tracker(BaseProgress):
         return f"{self.__class__.__name__}({', '.join(args)})"
 
     def reset_on_restart(self) -> None:
-        """Reset the progress on restart"""
+        """Reset the progress on restart."""
         value = self.completed if self.processed is None else self.processed
 
         if self.ready is not None:
@@ -85,8 +84,7 @@ class Tracker(BaseProgress):
 
 @dataclass
 class Progress(BaseProgress):
-    """
-    Track aggregated and current progress.
+    """Track aggregated and current progress.
 
     Args:
         total: Intended to track the total progress of an event
@@ -123,9 +121,8 @@ class Progress(BaseProgress):
 
 @dataclass
 class DataLoaderProgress(Progress):
-    """
-    Tracks the dataloader progress
-    These counters are local to a trainer rank. By default, they are not globally synced across all ranks.
+    """Tracks the dataloader progress These counters are local to a trainer rank. By default, they are not globally
+    synced across all ranks.
 
     Args:
         total: Tracks the total dataloader progress
@@ -138,9 +135,8 @@ class DataLoaderProgress(Progress):
 
 @dataclass
 class SchedulerProgress(Progress):
-    """
-    Tracks the scheduler progress
-    These counters are local to a trainer rank. By default, they are not globally synced across all ranks.
+    """Tracks the scheduler progress These counters are local to a trainer rank. By default, they are not globally
+    synced across all ranks.
 
     Args:
         total: Tracks the total scheduler progress
@@ -153,8 +149,7 @@ class SchedulerProgress(Progress):
 
 @dataclass
 class OptimizerProgress(BaseProgress):
-    """
-    Track optimizer progress.
+    """Track optimizer progress.
 
     Args:
         step: Tracks ``optimizer.step`` calls.
@@ -175,8 +170,7 @@ class OptimizerProgress(BaseProgress):
 
 @dataclass
 class OptimizationProgress(BaseProgress):
-    """
-    Track optimization progress.
+    """Track optimization progress.
 
     Args:
         optimizer: Tracks optimizer progress.
